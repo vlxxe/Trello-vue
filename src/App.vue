@@ -1,13 +1,16 @@
 <template>
   <v-app>
     <div class="d-flex flex-row justify-start align-start cnt">
-      <trelloList v-for="list in ALL_LISTS" v-bind:list="list" v-bind:key="list.id" />
+      <draggable class="d-flex flex-row justify-start align-start">
+        <trelloList v-for="list in ALL_LISTS" :list="list" :key="list.id" />
+      </draggable>
       <trelloActionButton />
     </div>
   </v-app>
 </template>
 
 <script>
+import draggable from "vuedraggable";
 import trelloList from "./components/trelloList";
 import trelloActionButton from "./components/trelloActionButton";
 import { mapGetters } from "vuex";
@@ -15,7 +18,8 @@ export default {
   name: "App",
   components: {
     trelloList,
-    trelloActionButton
+    trelloActionButton,
+    draggable
   },
   computed: mapGetters(['ALL_LISTS']),
 };

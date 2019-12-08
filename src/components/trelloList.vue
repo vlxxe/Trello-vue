@@ -1,17 +1,21 @@
 <template>
   <v-card class="list" width="250" outlined>
     <h2>{{list.title}}</h2>
-    <trelloCard v-for="card in list.cards" v-bind:card="card" v-bind:key="card.id" />
-		<trelloActionButton :contentType="'card'" v-bind:id="list.id" />
+		<draggable :list="list.cards">
+			<trelloCard v-for="card in list.cards" :card="card" :key="card.id" />
+		</draggable>
+		<trelloActionButton :contentType="'card'" :id="list.id" />
   </v-card>
 </template>
 
 <script>
+import draggable from "vuedraggable";
 import trelloCard from "./trelloCard";
 import trelloActionButton from "./trelloActionButton";
 export default {
 	props: ['list'],
   components: {
+		draggable,
 		trelloCard,
 		trelloActionButton
 	},

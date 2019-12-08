@@ -1,14 +1,17 @@
 export default {
 	actions: {
 		ADD_LIST(context, payload) {
-			context.commit('updateLists', payload)
+			context.commit('addList', payload)
 		},
 		ADD_CARD(context, payload) {
-			context.commit('updateCards', payload)
-		}
+			context.commit('addCard', payload)
+		},
+		DELETE_CARD(context, payload) {
+			context.commit('deleteCard', payload)
+		},
 	},
 	mutations: {
-		updateLists(state, payload) {
+		addList(state, payload) {
 			const newList = {
 				id: Date.now(),
 				title: payload,
@@ -16,7 +19,7 @@ export default {
 			}
 			state.lists.push(newList)
 		},
-		updateCards(state, payload) {
+		addCard(state, payload) {
 			const newCard = {
 				id: Date.now(),
 				text: payload.text,
@@ -26,39 +29,47 @@ export default {
 					list.cards.push(newCard)
 				}
 			})
+		},
+		deleteCard(state, payload) {
+			state.lists.map(list => {
+				let index = list.cards.findIndex(card => card.id === payload)
+				if ( index >= 0 ) {
+					list.cards.splice(index, 1)
+				}
+			}) 
 		}
 	},
 	state: {
 		lists: [
 			{
-				id: 0,
-				title: 'Title for cards 1',
+				id: 1,
+				title: 'List title 1',
 				cards: [
 					{
-						id: 0,
-						text: 'Simple text 1',
+						id: 10,
+						text: 'Card title 1 from list 1',
 					},
 					{
-						id: 1,
-						text: 'Simple text 2',
+						id: 100,
+						text: 'Card title 2 from list 1',
 					},
 				],
 			},
 			{
-				id: 1,
-				title: 'Title for cards 2',
+				id: 2,
+				title: 'List title 2',
 				cards: [
 					{
-						id: 0,
-						text: 'Simple second text 1',
+						id: 20,
+						text: 'Card title 1 from list 2',
 					},
 					{
-						id: 1,
-						text: 'Simple second text 2',
+						id: 200,
+						text: 'Card title 2 from list 2',
 					},
 					{
-						id: 2,
-						text: 'Simple second text 3',
+						id: 2000,
+						text: 'Card title 3 from list 2',
 					},
 				],
 			},

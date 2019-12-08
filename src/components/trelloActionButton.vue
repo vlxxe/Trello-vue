@@ -5,7 +5,7 @@
 			outlined
 			color="secondary"
 			v-if="!isFormOpen"
-			v-on:click="clickForm"
+			@click="clickForm"
 		>+ Add another {{contentType}}</v-btn>
 
 		<v-form v-else>
@@ -34,7 +34,7 @@ export default {
 			default: 'list',
 			type: String,
 		},
-		id: Number
+		id: Number,
 	},
 	data() {
 		return {
@@ -63,7 +63,7 @@ export default {
 		addCard() {
 			this.$store.dispatch('ADD_CARD', {
 				id: this.id,
-				text: this.titleForm
+				text: this.titleForm,
 			})
 		},
 		addList() {
@@ -77,13 +77,13 @@ export default {
 </script>
 
 <style scoped>
-	p {
-		margin: 0 !important;
-	}
-	.btn {
-		width: 250px;
-	}
-	.icon-close:hover {
-		opacity: 0.5;
-	}
+p {
+	margin: 0 !important;
+}
+.btn {
+	width: 250px;
+}
+.icon-close:hover {
+	opacity: 0.5;
+}
 </style>
