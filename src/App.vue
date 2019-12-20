@@ -1,32 +1,15 @@
 <template>
-  <v-app>
-    <div class="d-flex flex-row justify-start align-start cnt">
-      <draggable class="d-flex flex-row justify-start align-start">
-        <trelloList v-for="list in ALL_LISTS" :list="list" :key="list.id" />
-      </draggable>
-      <trelloActionButton />
-    </div>
-  </v-app>
+	<v-app>
+		<trelloBoard />
+	</v-app>
 </template>
 
 <script>
-import draggable from "vuedraggable";
-import trelloList from "./components/trelloList";
-import trelloActionButton from "./components/trelloActionButton";
-import { mapGetters } from "vuex";
+import trelloBoard from './components/trelloBoard'
 export default {
-  name: "App",
-  components: {
-    trelloList,
-    trelloActionButton,
-    draggable
-  },
-  computed: mapGetters(['ALL_LISTS']),
-};
+	name: 'App',
+	components: {
+		trelloBoard,
+	},
+}
 </script>
-
-<style scoped>
-  .cnt {
-    padding: 10px;
-  }
-</style>

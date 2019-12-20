@@ -1,5 +1,5 @@
 <template>
-	<div class="nn">
+	<div>
 		<v-btn
 			class="btn"
 			outlined

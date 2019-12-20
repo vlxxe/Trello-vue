@@ -9,6 +9,9 @@ export default {
 		DELETE_CARD(context, payload) {
 			context.commit('deleteCard', payload)
 		},
+		DELETE_LIST(context, payload) {
+			context.commit('deleteList', payload)
+		},
 	},
 	mutations: {
 		addList(state, payload) {
@@ -33,10 +36,28 @@ export default {
 		deleteCard(state, payload) {
 			state.lists.map(list => {
 				let index = list.cards.findIndex(card => card.id === payload)
-				if ( index >= 0 ) {
+				if (index >= 0) {
 					list.cards.splice(index, 1)
 				}
-			}) 
+			})
+		},
+		deleteList(state, payload) {
+			let index = state.lists.findIndex(list => list.id === payload)
+			if (index >= 0) {
+				state.lists.splice(index, 1)
+			}
+		},
+		updateList(state, payload) {
+			console.log('updateList ', payload);
+			state.lists = payload
+		},
+		updateCards(state, payload) {
+			console.log('updateCards ', payload);
+			state.lists.map(list => {
+				if (list.id === payload.listId) {
+					list.cards = payload.cards
+				}
+			})
 		}
 	},
 	state: {
